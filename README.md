@@ -1,11 +1,11 @@
-<div align="center">
+# Letters Across the Meridian — For Aline
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+An intimate long-distance anniversary sanctuary, real-time shared letters, notebook poetry on ruled paper, September 29 countdown, and memories for Jazz and Aline.
 
-  <h1>Built with AI Studio</h2>
-
-  <p>The fastest path from prompt to production with Gemini.</p>
-
-  <a href="https://aistudio.google.com/apps">Start building</a>
-
-</div>
+## Features
+- **Celestial Countdown**: Shows double clocks for Aline's and Jazz's horizons, counting down to September 29.
+- **Letters to Aline**: Real-time shared letter writing with stationery themes and read-receipts.
+- **Wax Letters**: Broken-seal love letters for special moments.
+- **Verses**: Ruled-paper poetry with interactive clickable words showing hidden secrets.
+- **When We Meet**: Bucket list for romantic plans with category sorting.
+- **I Love You Heartbeat**: Sending warm tactile feedback.

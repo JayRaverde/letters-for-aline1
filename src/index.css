@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-script: "Alex Brush", cursive;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+
+  --color-midnight: #07090e;
+  --color-midnight-card: #0d121c;
+  --color-midnight-subtle: #141b29;
+  --color-midnight-border: #222d42;
+
+  --color-gold: #e5be7a;
+  --color-gold-glow: #f9e2b2;
+  --color-gold-dim: #7a633a;
+
+  --color-rose: #d95874;
+  --color-rose-glow: #f794a8;
+  --color-rose-dim: #5c1e2b;
+
+  --color-parchment: #f6f0e4;
+  --color-parchment-dim: #9b9487;
+  --color-ink: #1a1612;
+
+  --color-starlight: #adc4e2;
+  --color-starlight-glow: #d6e4f7;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07090e;
+}
+::-webkit-scrollbar-thumb {
+  background: #222d42;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e5be7a;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.85); }
+  50% { opacity: 0.95; transform: scale(1.15); }
+}
+
+@keyframes heartThrob {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.18); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes auroraFlow {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+  50% { transform: translate(20px, -15px) scale(1.08); opacity: 0.25; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+}
+
+.animate-twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+.animate-heart-throb {
+  animation: heartThrob 1.8s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+.animate-aurora {
+  animation: auroraFlow 14s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.35s ease-out forwards;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.3; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 1.6s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+/* Lined Notebook Paper styling */
+.ruled-paper-warm {
+  background-color: #fdfbf7;
+}
+
+.ruled-paper-dark {
+  background-color: #14070d;
+}
+
+.paper-margin-red {
+  position: relative;
+}

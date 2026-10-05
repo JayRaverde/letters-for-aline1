@@ -1,0 +1,6 @@
+{
+  "name": "Letters Across the Meridian - For Aline",
+  "description": "An intimate long-distance anniversary sanctuary, real-time shared letters, notebook poetry on ruled paper, September 29 countdown, and memories for Jazz and Aline.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
