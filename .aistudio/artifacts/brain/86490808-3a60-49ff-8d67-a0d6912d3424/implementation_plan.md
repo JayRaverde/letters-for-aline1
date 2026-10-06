@@ -1,100 +1,76 @@
-# Fix Google AI Studio Cloud Run Shared Sanctuary for Aline
+# Lock Screen Experience & Sanctuary Access for Aline
 
-Enable the shared Google AI Studio Cloud Run link to serve the live sanctuary seamlessly without 404 or auth errors, preserving the anniversary countdown lock screen with passcode `september29`.
+Clarify why the countdown lock screen appears and ensure the lock screen transition, whisper key (`september29`), and "Enter Sanctuary" access operate smoothly for Aline.
 
 ## User Review & Critical Decisions
 
 > [!IMPORTANT]
-> The following choices were confirmed in Phase 1:
-> - **Hosting & Link Target**: Fix Google AI Studio Cloud Run share settings so the provided Shared App URL (`ais-pre-...`) boots and serves the sanctuary reliably for Aline tonight.
-> - **Opening Experience**: Keep the countdown lock screen active, permitting immediate early unlock with secret passcode `september29`.
+> - **Why It Shows This**: The lock screen appears because the unlock date and time is currently set to **October 6 at 11:00 AM**. Since that time is still in the future, the app automatically guards the surprise behind the countdown lock screen.
+> - **Confirmed Experience**: Keep the romantic countdown lock screen active with the wax seal, target countdown, secret whisper passcode (`september29`), and the instant **"Enter Sanctuary"** button so Aline can either watch the countdown or unlock her gift right away.
+> - **Zero Content Modification**: All 12 poems, 4 wax letters, 29 bucket list items, "Meu Amor" pet name, and custom dates remain 100% preserved and untouched.
 
 ---
 
 ## 1. Overview & Core Concept
 
-- **What It Does**: Resolves the root cause of the Cloud Run 404 / blank screen so Aline can open `https://ais-pre-ptqimontoaebmgus6tavk7-680766178177.europe-west1.run.app` directly on her mobile device tonight, see the romantic countdown and wax seal lock, and enter the sanctuary using the passcode `september29`.
-- **Target Audience / Persona**: Aline (receiving the private long-distance anniversary gift from Jazz).
-- **Key Value**: Delivers an immediate, functioning link that works across mobile browsers without Google authentication roadblocks or container crashes.
+- **What It Does**: Explains the time-lock behavior and ensures the lock screen provides an effortless, magical entry for Aline tonight or tomorrow morning.
+- **Audience**: Aline (recipient) and Jazz (author).
+- **Core Value**: Builds anticipation with the celestial countdown to October 6 at 11:00 AM, while still allowing Aline to unwrap her gift early with a single tap on **"Enter Sanctuary"** or by whispering the passcode **`september29`**.
 
 ---
 
-## 2. User Experience & Visual Design
-
-- **Arrival & Lock Screen**:
-  - Warm midnight celestial canvas (`#070205`) with twinkling star particles and floating constellation beacons.
-  - Ornate crimson wax seal medallion inscribed with "A & J | OCT 5 10 PM".
-  - Live countdown timer running down to 10:00 PM tonight.
-  - Secret passcode entry box accepting `september29` with joyful rose-gold confetti shower on unlock.
-  - Direct "Enter Sanctuary Directly" shortcut button for effortless access if she doesn't want to type.
-- **Inside the Sanctuary**:
-  - **September 29 Countdown**: Dual horizon clocks (Her Horizon & His Horizon) with a live synchronized pulse heartbeat bridge.
-  - **Letters to Aline Desk**: Warm ruled parchment & velvet noir stationery with real-time letters from Jazz.
-  - **"Open When..." Wax Letters**: Envelopes sealed with rose, gold, sapphire, and emerald wax.
-  - **Notebook Poetry**: Lined notebook paper verses with hidden romantic whispers on hover/tap.
-  - **When We Meet**: Bucket list categorized into firsts, cozy evenings, food, and adventures.
-  - **Real-Time Heartbeat Touch**: Tactile pulsing crimson heart sending warm screen flashes and counter updates.
-- **Mobile Ergonomics**:
-  - Compliant with mobile touch targets ($\ge 44\text{px}$ hitboxes).
-  - Top navigation bar strictly capped under 15% viewport height with horizontal scrolling tab pills.
-  - Zero-pill metadata formatting with clean typographic separators.
-
----
-
-## 3. Key Technical Decisions & Diagnostics
-
-- **Root Cause of 404 on Cloud Run Shared URL (`ais-pre-`)**:
-  - *Port Binding Issue*: `server.ts` was hardcoded to `const PORT = 3000;`. In Google Cloud Run containers, traffic is routed to `process.env.PORT` (typically `8080`). When a container does not bind to `process.env.PORT`, Cloud Run health checks fail, resulting in an immediate HTTP 404 / 503.
-  - *Fix*: Bind dynamically to `const PORT = Number(process.env.PORT) || 3000;` on host `0.0.0.0`.
-- **Production Container Boot Pipeline**:
-  - *Production Serving Mode*: `server.ts` must detect when `dist/index.html` exists and serve static assets via `express.static(distPath)` with an SPA fallback `app.get('*')`. It must avoid booting the heavy Vite dev middleware in Cloud Run production.
-  - *Start Script Alignment*: In `package.json`, set `"start": "node server.ts"` (or `"start": "tsx server.ts"`) to align with Cloud Run runtime specifications.
-- **Client Resilience**:
-  - In `LiveLettersDesk.tsx`, API requests are already guarded with `application/json` checks and fallback to persistent `localStorage`, ensuring zero blank screens even under transient network interruptions.
-  - React `ErrorBoundary` wraps the entire root in `main.tsx` to trap any DOM or WebKit exceptions.
-
----
-
-## 4. Technical Architecture & Data Strategy
+## 2. User Experience & Visual Flow
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                   Aline's Mobile Browser                    │
-│   (Opens ais-pre Cloud Run URL on iOS / Android Chrome)     │
+│                    Aline Opens Link Tonight                 │
+│                                                             │
+│   ┌─────────────────────────────────────────────────────┐   │
+│   │                 Crimson Wax Seal                    │   │
+│   │                     A & J                           │   │
+│   │             OCTOBER 6 AT 11:00 AM                   │   │
+│   └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│   "Everything I Wanted to Tell You"                         │
+│   Countdown Clock: Days : Hours : Mins : Secs               │
+│                                                             │
+│   ┌─────────────────────────────────────────────────────┐   │
+│   │  Secret Whisper: [ september29 ]                    │   │
+│   │                                                     │   │
+│   │  [ Open Early ]         [ ❤️ Enter Sanctuary ]      │   │
+│   └─────────────────────────────────────────────────────┘   │
 └──────────────────────────────┬──────────────────────────────┘
-                               │ HTTP GET /
+                               │ Taps "Enter Sanctuary" or enters passcode
                                ▼
 ┌─────────────────────────────────────────────────────────────┐
-│               Cloud Run Container (0.0.0.0:PORT)            │
-│  ┌───────────────────────────────────────────────────────┐  │
-│  │ Express Server (server.ts)                            │  │
-│  │ - Dynamic PORT: Number(process.env.PORT) || 3000      │  │
-│  │ - Static Asset Server (dist/index.html & assets/)     │  │
-│  │ - Live Letters API (/api/letters)                     │  │
-│  └───────────────────────────┬───────────────────────────┘  │
-└──────────────────────────────┼──────────────────────────────┘
-                               │ Serves Bundled Client
-                               ▼
-┌─────────────────────────────────────────────────────────────┐
-│                  React 19 Sanctuary Tree                    │
-│  ┌───────────────────────────────────────────────────────┐  │
-│  │ <ErrorBoundary>                                       │  │
-│  │   └─ <App>                                            │  │
-│  │       ├─ <StarryCanvas> (Twinkling constellation)     │  │
-│  │       ├─ <AnniversaryTimeLockScreen> (Code: sep29)    │  │
-│  │       └─ Sanctuary Views:                             │  │
-│  │           ├─ <CelestialCountdown>                     │  │
-│  │           ├─ <LiveLettersDesk> (Auto-persisted)       │  │
-│  │           ├─ <SealedWaxLetters>                       │  │
-│  │           ├─ <InteractivePoetryParchment>             │  │
-│  │           ├─ <MeetingBucketList>                      │  │
-│  │           └─ <TactileHeartbeat>                       │  │
-│  └───────────────────────────────────────────────────────┘  │
+│              Sanctuary Unlocks (Confetti Burst)             │
+│                                                             │
+│   • 12 Hand-Penned Notebook Poems on Ruled Paper            │
+│   • 4 Sealed Wax Letters Ready to Unseal                    │
+│   • 29 "When We Meet" Milestones & Bucket List Plans        │
+│   • Constellation Memories in the Night Sky                 │
+│   • Tactile Heartbeat Across the Meridian                   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-- **Execution Steps**:
-  1. Update `server.ts` to bind to `process.env.PORT || 3000` and cleanly serve production `dist` files whenever built.
-  2. Verify `package.json` scripts (`start`, `dev`, `build`).
-  3. Re-execute `npm run build` and `compile_applet`.
-  4. Test local port responsiveness and health endpoints.
+1. **Initial View**:
+   - The night sky with twinkling constellation stars.
+   - The wax seal medallion displaying the target unlock time.
+   - The live countdown timer ticking down to October 6 at 11:00 AM.
+2. **Access Options for Aline**:
+   - **One-Tap Instant Entry**: Tapping **"Enter Sanctuary"** immediately triggers a romantic crimson & gold confetti burst and smoothly reveals the entire sanctuary.
+   - **Passcode Entry**: Typing **`september29`** (or tapping "Open Early") unlocks the sanctuary.
+   - **Natural Timer Expiry**: When the clock strikes 11:00 AM on October 6, the lock automatically opens.
+3. **Pristine Recipient Mode**:
+   - Zero editor controls, zero developer toolbars, and zero workshop buttons appear for Aline.
+
+---
+
+## 3. Technical Verification & Architecture
+
+- **State Verification**:
+  - `isCreatorMode` remains strictly `false` so all editor modes are hidden.
+  - `config.unlockDateTime` preserves `"2026-10-06T11:00:00"`.
+  - `sessionUnlocked` handles the transition when the button or passcode is used, persisting in `localStorage` so Aline doesn't have to re-enter the code on refresh.
+- **Standby Bundle Integrity**:
+  - The downloadable pre-built ZIP bundle (`sanctuary-for-aline-web.zip`) remains compiled and ready for drag-and-drop deployment on Netlify or Vercel.

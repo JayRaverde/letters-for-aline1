@@ -1,328 +1,323 @@
 import { AnniversaryConfig, BucketListItem, Poem, SealedLetter, ConstellationStar } from '../types';
 
 export const initialConfig: AnniversaryConfig = {
-  herName: "Aline",
-  herPetName: "My Love",
-  hisName: "Jazz",
-  anniversaryDate: "2026-09-29T11:00:00",
-  unlockDateTime: "2026-10-05T22:00:00",
-  herCity: "Her Horizon",
-  herTimezoneOffsetHours: 0,
-  hisCity: "His Horizon",
-  hisTimezoneOffsetHours: -5,
-  sharedSongOrQuote: "Across every mile, under the very same moon, I'd choose you in every lifetime.",
-  totalHeartbeatsSent: 37843200,
-  themePalette: 'soft-red',
-  secretPasscode: 'september29',
-  creatorPasscode: 'jazz29',
-  isSealed: true,
+  "herName": "Aline",
+  "herPetName": "Meu Amor",
+  "hisName": "Jazz",
+  "anniversaryDate": "2026-09-29T11:00:00",
+  "unlockDateTime": "2026-10-06T11:00:00",
+  "herCity": "Her Horizon",
+  "herTimezoneOffsetHours": 0,
+  "hisCity": "His Horizon",
+  "hisTimezoneOffsetHours": -5,
+  "sharedSongOrQuote": "Across every mile, under the very same moon, I'd choose you in every lifetime.",
+  "totalHeartbeatsSent": 37843200,
+  "themePalette": "soft-red",
+  "secretPasscode": "september29",
+  "creatorPasscode": "jazz29",
+  "isSealed": true
 };
 
 export const initialBucketList: BucketListItem[] = [
-  // --- Our first day ---
   {
-    id: 'b-first-1',
-    title: 'The First Hug',
-    category: 'firsts',
-    note: 'No rushing it. I genuinely think that one is going to last forever.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-first-1",
+    "title": "The First Hug",
+    "category": "firsts",
+    "note": "No rushing it. I genuinely think that one is going to last forever.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-first-2',
-    title: 'First Proper Kiss',
-    category: 'firsts',
-    note: 'No screens, no goodbye calls, just us finally together.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-first-2",
+    "title": "First Proper Kiss",
+    "category": "firsts",
+    "note": "No screens, no goodbye calls, just us finally together.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-first-3',
-    title: 'Finally Seeing Each Other Without a Screen Between Us',
-    category: 'firsts',
-    note: 'Seeing your smile, your eyes, and your hands in person for the very first time.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-first-3",
+    "title": "Finally Seeing Each Other Without a Screen Between Us",
+    "category": "firsts",
+    "note": "Seeing your smile, your eyes, and your hands in person for the very first time.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-first-4',
-    title: 'Hugs and Kisses Whenever We Feel Like It',
-    category: 'firsts',
-    note: 'Because we finally can. Any time of day or night, just reaching out and holding you.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
-  },
-  // --- Things I already know we're doing ---
-  {
-    id: 'b-doing-1',
-    title: 'Watching "My Life with the Walter Boys" Together',
-    category: 'movies',
-    note: 'Curled up on the couch, laughing, and bingeing the drama together.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-first-4",
+    "title": "Hugs and Kisses Whenever We Feel Like It",
+    "category": "firsts",
+    "note": "Because we finally can. Any time of day or night, just reaching out and holding you.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-doing-2',
-    title: 'Watching "The Little Prince"',
-    category: 'movies',
-    note: 'Under one massive blanket, talking about what is truly essential to the heart.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-doing-1",
+    "title": "Watching \"My Life with the Walter Boys\" Together",
+    "category": "movies",
+    "note": "Curled up on the couch, laughing, and bingeing the drama together.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-doing-3',
-    title: 'Horror Movie Night (Probably IT)',
-    category: 'movies',
-    note: 'Georgie still had to take that damn paper boat. Head buried in my shoulder when it gets scary.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-doing-2",
+    "title": "Watching \"The Little Prince\"",
+    "category": "movies",
+    "note": "Under one massive blanket, talking about what is truly essential to the heart.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-doing-4',
-    title: 'That Movie You Told Me About',
-    category: 'movies',
-    note: 'The one with the woman falling in love with her childhood love. [Aline needs to fill this one in because I clearly forgot]',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-doing-3",
+    "title": "Horror Movie Night (Probably IT)",
+    "category": "movies",
+    "note": "Georgie still had to take that damn paper boat. Head buried in my shoulder when it gets scary.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-doing-5',
-    title: 'Reviewing My Poems and Books',
-    category: 'movies',
-    note: "Her reviewing my poems and books while I pretend I'm not nervous about her opinion.",
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-doing-4",
+    "title": "That Movie You Told Me About",
+    "category": "movies",
+    "note": "The one with the woman falling in love with her childhood love. [Aline needs to fill this one in because I clearly forgot]",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-doing-6',
-    title: 'Her Finally Beating Me at Chess',
-    category: 'movies',
-    note: 'Seeing her smile when she finally takes my king and delivers checkmate.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-doing-5",
+    "title": "Reviewing My Poems and Books",
+    "category": "movies",
+    "note": "Her reviewing my poems and books while I pretend I'm not nervous about her opinion.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-doing-7',
-    title: 'Watching Her Read Something I Wrote',
-    category: 'movies',
-    note: 'Watching her read something I wrote while sitting right next to me, memorizing every little expression.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
-  },
-  // --- Food because apparently this is important ---
-  {
-    id: 'b-food-1',
-    title: 'Two Eggs, Never Runny',
-    category: 'food',
-    note: 'Cooked to absolute perfection just the way she loves them.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-doing-6",
+    "title": "Her Finally Beating Me at Chess",
+    "category": "movies",
+    "note": "Seeing her smile when she finally takes my king and delivers checkmate.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-food-2',
-    title: 'Jungle Oats Caramel',
-    category: 'food',
-    note: 'Warm, sweet, and comforting on a cozy morning together.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-doing-7",
+    "title": "Watching Her Read Something I Wrote",
+    "category": "movies",
+    "note": "Watching her read something I wrote while sitting right next to me, memorizing every little expression.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-food-3',
-    title: 'Muesli & Soy Milk',
-    category: 'food',
-    note: 'Her signature breakfast, prepared with love.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-food-1",
+    "title": "Two Eggs, Never Runny",
+    "category": "food",
+    "note": "Cooked to absolute perfection just the way she loves them.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-food-4',
-    title: 'Two Pieces of Toast & Mixed Fruit',
-    category: 'food',
-    note: 'Crispy golden toast with fresh mixed fruit on the side.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-food-2",
+    "title": "Jungle Oats Caramel",
+    "category": "food",
+    "note": "Warm, sweet, and comforting on a cozy morning together.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-food-5',
-    title: 'Making Breakfast Together',
-    category: 'food',
-    note: 'Making breakfast together... and probably eating something completely different five minutes later.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-food-3",
+    "title": "Muesli & Soy Milk",
+    "category": "food",
+    "note": "Her signature breakfast, prepared with love.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-food-6',
-    title: 'Martini on the Beach',
-    category: 'food',
-    note: "And yes, naked on the beach because apparently we have no shame once we're finally together.",
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
-  },
-  // --- The stupid little things ---
-  {
-    id: 'b-little-1',
-    title: 'Taking a Bus Somewhere With Music Playing',
-    category: 'adventures',
-    note: 'Sharing earbuds, listening to music, and taking pictures of every single place we pass.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-food-4",
+    "title": "Two Pieces of Toast & Mixed Fruit",
+    "category": "food",
+    "note": "Crispy golden toast with fresh mixed fruit on the side.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-little-2',
-    title: 'Trying to See Through a Clear Pomegranate',
-    category: 'adventures',
-    note: 'Because apparently we need to investigate fruit now.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-food-5",
+    "title": "Making Breakfast Together",
+    "category": "food",
+    "note": "Making breakfast together... and probably eating something completely different five minutes later.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-little-3',
-    title: 'Stealing My Hoodie',
-    category: 'adventures',
-    note: 'Watching her drown in the sleeves and declaring it officially hers forever.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-food-6",
+    "title": "Martini on the Beach",
+    "category": "food",
+    "note": "And yes, naked on the beach because apparently we have no shame once we're finally together.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-little-4',
-    title: 'Her Reviewing My Poems in Person',
-    category: 'adventures',
-    note: "Her reviewing my poems while I'm sitting there watching her reaction up close.",
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-little-1",
+    "title": "Taking a Bus Somewhere With Music Playing",
+    "category": "adventures",
+    "note": "Sharing earbuds, listening to music, and taking pictures of every single place we pass.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-little-5',
-    title: 'A Three-Hour Piggyback Ride on Our Hike',
-    category: 'adventures',
-    note: 'Because apparently I have volunteered for voluntary suffering and sore muscles.',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-little-2",
+    "title": "Trying to See Through a Clear Pomegranate",
+    "category": "adventures",
+    "note": "Because apparently we need to investigate fruit now.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-little-6',
-    title: 'Swimming in Rough Seas',
-    category: 'adventures',
-    note: 'Swimming in rough seas even though one of us will inevitably say, "Maybe this was a bad idea."',
-    completed: false,
-    isPriority: false,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-little-3",
+    "title": "Stealing My Hoodie",
+    "category": "adventures",
+    "note": "Watching her drown in the sleeves and declaring it officially hers forever.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-little-7',
-    title: 'Going Somewhere With No Real Plan',
-    category: 'adventures',
-    note: 'No schedule, no rush, just holding hands and making the day up as we go.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
-  },
-  // --- The quiet ones ---
-  {
-    id: 'b-quiet-1',
-    title: 'A Rainy Afternoon With Nowhere We Need to Be',
-    category: 'cozy',
-    note: 'Rain beating against the window, cozy blankets, coffee brewing, and nowhere else to be.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-little-4",
+    "title": "Her Reviewing My Poems in Person",
+    "category": "adventures",
+    "note": "Her reviewing my poems while I'm sitting there watching her reaction up close.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-quiet-2',
-    title: 'Lying Together Without Talking',
-    category: 'cozy',
-    note: "Lying together in peaceful silence because we finally don't have to fill every silence over a phone screen.",
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-little-5",
+    "title": "A Three-Hour Piggyback Ride on Our Hike",
+    "category": "adventures",
+    "note": "Because apparently I have volunteered for voluntary suffering and sore muscles.",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-quiet-3',
-    title: 'Her Falling Asleep Next to Me',
-    category: 'cozy',
-    note: 'Feeling her warmth, hearing her soft breathing, knowing she is right there.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-little-6",
+    "title": "Swimming in Rough Seas",
+    "category": "adventures",
+    "note": "Swimming in rough seas even though one of us will inevitably say, \"Maybe this was a bad idea.\"",
+    "completed": false,
+    "isPriority": false,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-quiet-4',
-    title: 'Me Waking Up and Realizing She Is Actually There',
-    category: 'cozy',
-    note: 'Opening my eyes, seeing her face beside me, and realizing the distance is finally gone.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-little-7",
+    "title": "Going Somewhere With No Real Plan",
+    "category": "adventures",
+    "note": "No schedule, no rush, just holding hands and making the day up as we go.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   },
   {
-    id: 'b-quiet-5',
-    title: 'Luna and Sol',
-    category: 'cozy',
-    note: 'Whatever Luna and Sol end up meaning to us when we finally get there.',
-    completed: false,
-    isPriority: true,
-    addedBy: 'Jazz',
-    dateAdded: '2026-10-05',
+    "id": "b-quiet-1",
+    "title": "A Rainy Afternoon With Nowhere We Need to Be",
+    "category": "cozy",
+    "note": "Rain beating against the window, cozy blankets, coffee brewing, and nowhere else to be.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
+  },
+  {
+    "id": "b-quiet-2",
+    "title": "Lying Together Without Talking",
+    "category": "cozy",
+    "note": "Lying together in peaceful silence because we finally don't have to fill every silence over a phone screen.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
+  },
+  {
+    "id": "b-quiet-3",
+    "title": "Her Falling Asleep Next to Me",
+    "category": "cozy",
+    "note": "Feeling her warmth, hearing her soft breathing, knowing she is right there.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
+  },
+  {
+    "id": "b-quiet-4",
+    "title": "Me Waking Up and Realizing She Is Actually There",
+    "category": "cozy",
+    "note": "Opening my eyes, seeing her face beside me, and realizing the distance is finally gone.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
+  },
+  {
+    "id": "b-quiet-5",
+    "title": "Luna and Sol",
+    "category": "cozy",
+    "note": "If you know... you know.",
+    "completed": false,
+    "isPriority": true,
+    "addedBy": "Jazz",
+    "dateAdded": "2026-10-05"
   }
 ];
 
 export const initialPoems: Poem[] = [
   {
-    id: 'p-distance-steals',
-    title: 'What the Distance Steals',
-    dateWritten: 'September 2026',
-    dedication: 'For Aline, who made geography obsolete',
-    stanzas: [
+    "id": "p-distance-steals",
+    "title": "What the Distance Steals",
+    "dateWritten": "September 2026",
+    "dedication": "For Aline, who made geography obsolete",
+    "stanzas": [
       "There is a small blue window through which I have learned to worship",
       "not a sun, though it burns the only light I keep these nights,",
       "her face suspended there in pixels, a saint behind glass",
@@ -356,32 +351,50 @@ export const initialPoems: Poem[] = [
       "and of how little it understood",
       "about what was already becoming ours"
     ],
-    interactiveWords: [
-      { word: 'window', whisper: 'The screen that held your face every midnight when we could not yet touch.' },
-      { word: 'laughter', whisper: 'The sound that melts every hard day into pure light.' },
-      { word: 'breathing', whisper: 'The soft cadence of your breath when you drift off to sleep on our calls.' },
-      { word: 'morning', whisper: 'The morning when I finally wake up beside you, with no screens between us.' }
+    "interactiveWords": [
+      {
+        "word": "window",
+        "whisper": "The screen that held your face every midnight when we could not yet touch."
+      },
+      {
+        "word": "laughter",
+        "whisper": "The sound that melts every hard day into pure light."
+      },
+      {
+        "word": "breathing",
+        "whisper": "The soft cadence of your breath when you drift off to sleep on our calls."
+      },
+      {
+        "word": "morning",
+        "whisper": "The morning when I finally wake up beside you, with no screens between us."
+      }
     ]
   },
   {
-    id: 'p-nb-olev',
-    title: 'Nb Olev',
-    dateWritten: 'Autumn 2026',
-    dedication: 'Blaka',
-    stanzas: [
+    "id": "p-nb-olev",
+    "title": "Nb Olev",
+    "dateWritten": "Autumn 2026",
+    "dedication": "Blaka",
+    "stanzas": [
       "To all that happened, it was too real for me"
     ],
-    interactiveWords: [
-      { word: 'real', whisper: 'Every single second with you felt truer than anything I had ever known.' },
-      { word: 'happened', whisper: 'What grew between us changed my world forever.' }
+    "interactiveWords": [
+      {
+        "word": "real",
+        "whisper": "Every single second with you felt truer than anything I had ever known."
+      },
+      {
+        "word": "happened",
+        "whisper": "What grew between us changed my world forever."
+      }
     ]
   },
   {
-    id: 'p-you',
-    title: 'You',
-    dateWritten: 'Autumn 2026',
-    dedication: 'For Aline, with all my love',
-    stanzas: [
+    "id": "p-you",
+    "title": "You",
+    "dateWritten": "Autumn 2026",
+    "dedication": "For Aline, with all my love",
+    "stanzas": [
       "I have written about distance,",
       "about time,",
       "about all the things between us.",
@@ -392,18 +405,27 @@ export const initialPoems: Poem[] = [
       "you are the only part",
       "I have never needed words for."
     ],
-    interactiveWords: [
-      { word: 'distance', whisper: 'All the miles that tried to keep us apart.' },
-      { word: 'words', whisper: 'Because what I feel for you lives beyond language.' },
-      { word: 'you', whisper: 'You, Aline. The only one my heart ever needed.' }
+    "interactiveWords": [
+      {
+        "word": "distance",
+        "whisper": "All the miles that tried to keep us apart."
+      },
+      {
+        "word": "words",
+        "whisper": "Because what I feel for you lives beyond language."
+      },
+      {
+        "word": "you",
+        "whisper": "You, Aline. The only one my heart ever needed."
+      }
     ]
   },
   {
-    id: 'p-poemi',
-    title: 'Poemi',
-    dateWritten: 'Autumn 2026',
-    dedication: 'For Aline, with all my love',
-    stanzas: [
+    "id": "p-poemi",
+    "title": "Poemi",
+    "dateWritten": "Autumn 2026",
+    "dedication": "For Aline, with all my love",
+    "stanzas": [
       "I could describe your smile,",
       "your voice,",
       "the way you make a room feel less empty.",
@@ -415,18 +437,27 @@ export const initialPoems: Poem[] = [
       "and who I am now,",
       "there is you."
     ],
-    interactiveWords: [
-      { word: 'smile', whisper: 'The warmest curve in the universe.' },
-      { word: 'voice', whisper: 'The melody that calms my racing mind every single night.' },
-      { word: 'between', whisper: 'The exact place where loving you transformed me into someone better.' }
+    "interactiveWords": [
+      {
+        "word": "smile",
+        "whisper": "The warmest curve in the universe."
+      },
+      {
+        "word": "voice",
+        "whisper": "The melody that calms my racing mind every single night."
+      },
+      {
+        "word": "between",
+        "whisper": "The exact place where loving you transformed me into someone better."
+      }
     ]
   },
   {
-    id: 'p-artemis',
-    title: 'Artemis',
-    dateWritten: 'Autumn 2026',
-    dedication: 'For Aline, with all my love',
-    stanzas: [
+    "id": "p-artemis",
+    "title": "Artemis",
+    "dateWritten": "Autumn 2026",
+    "dedication": "For Aline, with all my love",
+    "stanzas": [
       "Artemis,",
       "I gave you one job.",
       "Keep her warm.",
@@ -458,18 +489,27 @@ export const initialPoems: Poem[] = [
       "",
       "Sleep well, meu ursinho."
     ],
-    interactiveWords: [
-      { word: 'Artemis', whisper: 'My trusted little guardian watching over you when my arms cannot reach.' },
-      { word: 'bell', whisper: 'Tinkling softly in the night like a tiny heartbeat whispering my love.' },
-      { word: 'ursinho', whisper: 'My little bear, and my girl who holds him close.' }
+    "interactiveWords": [
+      {
+        "word": "Artemis",
+        "whisper": "My trusted little guardian watching over you when my arms cannot reach."
+      },
+      {
+        "word": "bell",
+        "whisper": "Tinkling softly in the night like a tiny heartbeat whispering my love."
+      },
+      {
+        "word": "ursinho",
+        "whisper": "My little bear, and my girl who holds him close."
+      }
     ]
   },
   {
-    id: 'p-if',
-    title: 'If...',
-    dateWritten: 'Autumn 2026',
-    dedication: 'For Aline, with all my love',
-    stanzas: [
+    "id": "p-if",
+    "title": "If...",
+    "dateWritten": "Autumn 2026",
+    "dedication": "For Aline, with all my love",
+    "stanzas": [
       "If there is a God,",
       "I hope He does not mind",
       "the questions.",
@@ -482,18 +522,27 @@ export const initialPoems: Poem[] = [
       "that someone is listening,",
       "but speaking anyway."
     ],
-    interactiveWords: [
-      { word: 'stars', whisper: 'Looking up at the exact same constellations you see from your sky.' },
-      { word: 'faith', whisper: 'The unwavering belief that you and I were always meant to find each other.' },
-      { word: 'speaking', whisper: 'Whispering your name into the night and knowing you feel it too.' }
+    "interactiveWords": [
+      {
+        "word": "stars",
+        "whisper": "Looking up at the exact same constellations you see from your sky."
+      },
+      {
+        "word": "faith",
+        "whisper": "The unwavering belief that you and I were always meant to find each other."
+      },
+      {
+        "word": "speaking",
+        "whisper": "Whispering your name into the night and knowing you feel it too."
+      }
     ]
   },
   {
-    id: 'p-chess',
-    title: 'Chess',
-    dateWritten: 'Autumn 2026',
-    dedication: 'For Aline, with all my love',
-    stanzas: [
+    "id": "p-chess",
+    "title": "Chess",
+    "dateWritten": "Autumn 2026",
+    "dedication": "For Aline, with all my love",
+    "stanzas": [
       "Pawn, advance.",
       "Must I?",
       "You must.",
@@ -523,18 +572,27 @@ export const initialPoems: Poem[] = [
       "",
       "I hate this game."
     ],
-    interactiveWords: [
-      { word: 'Queen', whisper: 'You, my queen. Always protecting the board and claiming my king.' },
-      { word: 'Checkmate', whisper: 'Her beating me at chess in person on our bucket list!' },
-      { word: 'game', whisper: 'Even when you beat me, I love playing every match with you.' }
+    "interactiveWords": [
+      {
+        "word": "Queen",
+        "whisper": "You, my queen. Always protecting the board and claiming my king."
+      },
+      {
+        "word": "Checkmate",
+        "whisper": "Her beating me at chess in person on our bucket list!"
+      },
+      {
+        "word": "game",
+        "whisper": "Even when you beat me, I love playing every match with you."
+      }
     ]
   },
   {
-    id: 'p-after',
-    title: 'After',
-    dateWritten: 'Autumn 2026',
-    dedication: 'For Aline, with all my love',
-    stanzas: [
+    "id": "p-after",
+    "title": "After",
+    "dateWritten": "Autumn 2026",
+    "dedication": "For Aline, with all my love",
+    "stanzas": [
       "Everything we are is borrowed.",
       "The warmth of a hand,",
       "the colour of an evening,",
@@ -565,18 +623,27 @@ export const initialPoems: Poem[] = [
       "",
       "Pinky promise."
     ],
-    interactiveWords: [
-      { word: 'soul', whisper: 'Finding you among eight billion people and knowing instantly: there you are.' },
-      { word: 'after', whisper: 'A quiet place beyond time and distance where we remain together.' },
-      { word: 'promise', whisper: 'Pinky promise, my love. Cross my heart and sealed forever.' }
+    "interactiveWords": [
+      {
+        "word": "soul",
+        "whisper": "Finding you among eight billion people and knowing instantly: there you are."
+      },
+      {
+        "word": "after",
+        "whisper": "A quiet place beyond time and distance where we remain together."
+      },
+      {
+        "word": "promise",
+        "whisper": "Pinky promise, my love. Cross my heart and sealed forever."
+      }
     ]
   },
   {
-    id: 'p-slumber',
-    title: 'Slumber in',
-    dateWritten: 'Autumn 2026',
-    dedication: 'For Aline, with all my love',
-    stanzas: [
+    "id": "p-slumber",
+    "title": "Slumber in",
+    "dateWritten": "Autumn 2026",
+    "dedication": "For Aline, with all my love",
+    "stanzas": [
       "Sleep comes not as a conqueror,",
       "but as a patient thief,",
       "moving through the labyrinth of the mind",
@@ -593,18 +660,27 @@ export const initialPoems: Poem[] = [
       "until the sweet breath of life",
       "fills your lungs again"
     ],
-    interactiveWords: [
-      { word: 'Sleep', whisper: 'Rest gently tonight, minha linda, cradled by every thought I send you.' },
-      { word: 'Goodnight', whisper: 'Never a goodbye, just a whisper until tomorrow morning rises.' },
-      { word: 'breath', whisper: 'The sweetest sound in the universe.' }
+    "interactiveWords": [
+      {
+        "word": "Sleep",
+        "whisper": "Rest gently tonight, minha linda, cradled by every thought I send you."
+      },
+      {
+        "word": "Goodnight",
+        "whisper": "Never a goodbye, just a whisper until tomorrow morning rises."
+      },
+      {
+        "word": "breath",
+        "whisper": "The sweetest sound in the universe."
+      }
     ]
   },
   {
-    id: 'p-rubys-flame',
-    title: "Ruby's flame",
-    dateWritten: 'Autumn 2026',
-    dedication: 'For Aline, with all my love',
-    stanzas: [
+    "id": "p-rubys-flame",
+    "title": "Ruby's flame",
+    "dateWritten": "Autumn 2026",
+    "dedication": "For Aline, with all my love",
+    "stanzas": [
       "They call the flame the herald of passion,",
       "yet tonight it seemed a humbler sovereign,",
       "scattering rubies where the darkness kept its court,",
@@ -624,18 +700,27 @@ export const initialPoems: Poem[] = [
       "Sometimes it is merely an evening freely given,",
       "and the quiet knowledge that, tonight, we were rich enough."
     ],
-    interactiveWords: [
-      { word: 'rubies', whisper: 'The deep red embers reflecting like jewels in the dark.' },
-      { word: 'mercy', whisper: 'The warmth we hold onto through long cold nights.' },
-      { word: 'rich', whisper: 'Being with you makes me richer than anything in this world.' }
+    "interactiveWords": [
+      {
+        "word": "rubies",
+        "whisper": "The deep red embers reflecting like jewels in the dark."
+      },
+      {
+        "word": "mercy",
+        "whisper": "The warmth we hold onto through long cold nights."
+      },
+      {
+        "word": "rich",
+        "whisper": "Being with you makes me richer than anything in this world."
+      }
     ]
   },
   {
-    id: 'p-goodwill',
-    title: 'Left Turn on Goodwill Rd',
-    dateWritten: 'Autumn 2026',
-    dedication: 'For Aline, with all my love',
-    stanzas: [
+    "id": "p-goodwill",
+    "title": "Left Turn on Goodwill Rd",
+    "dateWritten": "Autumn 2026",
+    "dedication": "For Aline, with all my love",
+    "stanzas": [
       "I want to grow old with you.",
       "",
       "Not because I'm afraid of growing old alone,",
@@ -643,18 +728,27 @@ export const initialPoems: Poem[] = [
       "but because I can't think of anyone",
       "I'd rather become old with."
     ],
-    interactiveWords: [
-      { word: 'old', whisper: 'Wrinkled hands holding each other, still laughing at the same silly jokes.' },
-      { word: 'grow', whisper: 'Through every season, year after year, choosing you every single day.' },
-      { word: 'anyone', whisper: 'Nobody else. Only you, Aline.' }
+    "interactiveWords": [
+      {
+        "word": "old",
+        "whisper": "Wrinkled hands holding each other, still laughing at the same silly jokes."
+      },
+      {
+        "word": "grow",
+        "whisper": "Through every season, year after year, choosing you every single day."
+      },
+      {
+        "word": "anyone",
+        "whisper": "Nobody else. Only you, Aline."
+      }
     ]
   },
   {
-    id: 'p-more',
-    title: 'More',
-    dateWritten: 'Autumn 2026',
-    dedication: 'For Aline, with all my love',
-    stanzas: [
+    "id": "p-more",
+    "title": "More",
+    "dateWritten": "Autumn 2026",
+    "dedication": "For Aline, with all my love",
+    "stanzas": [
       "I love you more than the stars above us,",
       "more than the breath that keeps us here,",
       "more than all the hours",
@@ -687,147 +781,215 @@ export const initialPoems: Poem[] = [
       "one of the things",
       "that was always true."
     ],
-    interactiveWords: [
-      { word: 'stars', whisper: 'Even when every star burns out, this love remains.' },
-      { word: 'miles', whisper: 'Every single mile is just a temporary measurement waiting to be erased.' },
-      { word: 'true', whisper: 'Loving you is not something I decided; it is something that was always true.' }
+    "interactiveWords": [
+      {
+        "word": "stars",
+        "whisper": "Even when every star burns out, this love remains."
+      },
+      {
+        "word": "miles",
+        "whisper": "Every single mile is just a temporary measurement waiting to be erased."
+      },
+      {
+        "word": "true",
+        "whisper": "Loving you is not something I decided; it is something that was always true."
+      }
     ]
   }
 ];
 
 export const initialSealedLetters: SealedLetter[] = [
   {
-    id: 'l-1',
-    prompt: 'Open when the miles feel too heavy',
-    waxColor: 'rose',
-    title: 'When You Miss My Touch',
-    content: [
-      "My sweet Aline,",
-      "If you are opening this, the space between us probably feels unfair today. Maybe you had a long day and you just wanted to lean your head against my shoulder, or maybe you felt lonely looking at empty chairs.",
-      "I want you to place your hand flat over your chest right now. Feel that rhythm? That is not just your heart; that is the steady proof that someone across the earth is completely, irrevocably in love with you.",
-      "The distance is just a test of time, not depth. It cannot touch the way I adore your mind, your laugh, your voice, and every tiny quirk that makes you Aline. I am right here. Close your eyes, take a slow deep breath, and remember that every sunset brings us one day closer to never having to say goodbye at an airport again.",
+    "id": "l-1",
+    "prompt": "Open when the miles feel too heavy",
+    "title": "When You Miss My Touch",
+    "content": [
+      "Meu anjo,",
+      "",
+      "If you\u2019re opening this, I\u2019m guessing the distance feels a little unfair today. Maybe you had a long day and just wanted to rest your head on my shoulder, or maybe you looked at an empty chair and wished I was sitting there.",
+      "",
+      "Put your hand over your chest for me.",
+      "",
+      "Feel that rhythm?",
+      "",
+      "That\u2019s your heart, but it\u2019s also proof that somewhere across the world, mine is still beating for you. I\u2019m completely, irrevocably in love with you.",
+      "",
+      "The distance is only time, meu amor. It can\u2019t touch the way I love your mind, your laugh, your voice, or all the little things that make you Aline.",
+      "",
+      "I\u2019m right here.",
+      "",
+      "Close your eyes, take a slow breath, and imagine me holding you. Every sunset we spend apart is one less before there comes a day when reaching for me doesn\u2019t mean reaching through a screen.",
+      "",
+      "And when we fall asleep tonight, let our hearts find the same rhythm for a while, even from far away.",
+      "",
       "I love you more than all the miles between us."
     ],
-    signature: "Forever yours, Jazz",
-    postScript: "P.S. Send me a message right now with the word 'Horizon' so I know you needed this hug.",
-    opened: false,
+    "waxColor": "rose",
+    "signature": "Forever yours, Jazz",
+    "postScript": "P.S. Now that I\u2019ve stolen a little piece of your evening, come tell me what you were thinking about before you opened this.  I want the unedited version of you",
+    "isAnniversaryLetter": false,
+    "opened": true
   },
   {
-    id: 'l-2',
-    prompt: 'Open at 12:00 AM on September 29th',
-    isAnniversaryLetter: true,
-    lockedUntilDate: '2026-09-29',
-    waxColor: 'gold',
-    title: 'Happy Anniversary, My Love',
-    content: [
-      "Happy Anniversary, my beautiful Aline.",
-      "Another chapter with you, and still you take my breath away every single day. People always wonder how two people can love so fiercely across oceans and timezones, but they don't understand what it's like to know you.",
-      "Loving you is effortless. You are the poetry I always wanted to write, the steady warmth at the end of every exhausting sprint, the reason I look at the future with so much excitement.",
-      "Thank you for choosing me. Thank you for the late nights, the silly inside jokes, the patience, and the unconditional trust. You are my home, Aline, no matter what postal code we happen to be in.",
-      "Happy September 29th. May this year bring us to the moment where the countdown finally hits zero."
+    "id": "l-2",
+    "prompt": "Open at 12:00 AM on September 29th",
+    "title": "Happy Anniversary, My Love",
+    "content": [
+      "Happy Anniversary, my Aline.",
+      "",
+      "Another September 29th with you. And even though I\u2019m writing this on October 6th, I didn't want the date to pass without giving you something that was meant entirely for you.",
+      "",
+      "Somehow, after everything we\u2019ve lived through, you still manage to make loving you feel like discovering something new.",
+      "",
+      "People can look at the distance between us and wonder how two people can build something this deep without being able to simply reach across the room.",
+      "",
+      "They don't know you.",
+      "",
+      "They don't know the way your mind works, the way you can turn the most ordinary conversation into something I'll think about hours later, or how easily you can make me laugh when I wasn't expecting to.",
+      "",
+      "Loving you has never felt like something I had to force into existence. It just grew, quietly and stubbornly, until somewhere along the way, you became part of how I see the future.",
+      "",
+      "Thank you for choosing me. For the late nights, the ridiculous inside jokes, the patience, the trust, the little moments you probably don't realise I keep with me.",
+      "",
+      "And thank you for letting me be myself with you.",
+      "",
+      "You are home to me, meu amor. Not a place, not a postcode, not somewhere on a map. You.",
+      "",
+      "Happy September 29th, Anjo.",
+      "",
+      "Another year of us.",
+      "",
+      "And this time, I don't want to imagine the countdown hitting zero.",
+      "",
+      "I want to be there when it does"
     ],
-    signature: "With every fiber of my soul, Jazz",
-    postScript: "P.S. Today is our day. Celebrate us, because what we have is pure gold.",
-    opened: false,
+    "waxColor": "gold",
+    "signature": "With every fiber of my soul, Jazz",
+    "postScript": "P.S. September 29th may have passed, but it\u2019s still ours. Celebrate us today, Aline. I don\u2019t need a date to prove what we have, but I\u2019ll never need an excuse to celebrate you.",
+    "isAnniversaryLetter": true,
+    "opened": true
   },
   {
-    id: 'l-3',
-    prompt: "Open when you can't sleep at 2 AM",
-    waxColor: 'sapphire',
-    title: 'A Midnight Lullaby in Words',
-    content: [
-      "Hey beb,",
+    "id": "l-3",
+    "prompt": "Open when you can't sleep at 2 AM",
+    "title": "A Midnight Lullaby in Words",
+    "content": [
+      "Hey beb\u00e9,",
+      "",
       "If you're reading this because you can't sleep, then come here anjo.",
+      "",
       "I hope Artemis is keeping you company. Although, knowing him, he's probably getting all the credit for my absence. Give him a little hug for me.",
+      "",
       "Maybe you're still thinking about your day, or maybe your mind has decided that 2 AM is the perfect time to remember every single thing that has ever happened. I know how that goes. But you don't have to solve the world tonight, beb. You can leave some of it for tomorrow.",
+      "",
       "We would definitely be drinking hibiscus at this hour. With enough sugar to give anyone diabetes. And I would probably be laughing at you for something completely stupid, because apparently that is one of my greatest talents.",
+      "",
       "I miss the little things about you, anjo. The way I would look at all your whites, kiss you for no reason, and then act like nothing happened. Just because I could. Just because you're there. Those little moments are enough to make an ordinary day feel like something worth remembering.",
+      "",
       "And if you're very cansado, close your eyes for a little while, meu amor. My hypnosis should have you sleeping in just a few minutes. No promises though, I am not a licensed professional. Just a very convincing boyfriend.",
+      "",
       "Actually, maybe you can't sleep because you're already awake in my dreams.",
+      "",
       "We're somewhere by the beach, and the sun is being unnecessarily beautiful. You are probably complaining about the heat while I insist that we stay a little longer. There is no distance there. No screens, no goodbyes, no wondering when we get to see each other again. Just you, me, and the sound of the water doing what it has always done.",
-      "And when you wake up, maybe you will find yourself wishing you could go back. But that is alright, querida. We have more dreams to visit, and one day we won't have to wake up from them just to miss each other.",
+      "",
+      "And when you wake up, maybe you will find yourself wishing you could go back. But that is alright, querida. There will always be another place for us to find each other.",
+      "",
       "For now, sleep well. I love you. Boa noite, minha koala.",
-      "Sleep softly, my love. I'll meet you in our dreams."
+      "",
+      "Sleep softly, my love. I'll meet you there"
     ],
-    signature: "Holding you in spirit, Jazz",
-    postScript: "P.S. Listen to the ambient rain toggle on the player above while you drift off.",
-    opened: false,
+    "waxColor": "sapphire",
+    "signature": "Holding you in spirit, Jazz",
+    "postScript": "P.S. Close your eyes now, beb\u00e9. No more thinking. Just sleep.",
+    "isAnniversaryLetter": false,
+    "opened": true
   },
   {
-    id: 'l-4',
-    prompt: 'Open when you need a reminder of why we will make it',
-    waxColor: 'emerald',
-    title: 'The Blueprint of Us',
-    content: [
+    "id": "l-4",
+    "prompt": "Open when you need a reminder of why we will make it",
+    "title": "The Blueprint of Us",
+    "content": [
       "If you're reading this, I'm guessing you're having one of those days where the distance feels louder than usual.",
+      "",
       "So forget the distance for a minute. Think about how much of us exists in things that should have been impossible to build from this far apart.",
+      "",
       "You know the sound of my voice when I'm tired. I know when you're pretending you're fine. We've fallen asleep on calls, laughed about things that would make absolutely no sense to anyone else, sent each other things just because we knew the other would understand, and somehow made Artemis part of our relationship too.",
+      "",
       "We've already learned each other without having the luxury of simply reaching across a bed. That's what makes me so sure about us. Not some perfect idea of the future. Us.",
+      "",
       "The version of you I know after a long day. The version of me you get when I'm half asleep. The stupid jokes. The serious conversations. The moments where one of us just needs the other there, even if all we can do is stay on a call.",
+      "",
       "One day, the things we've only talked about will become boringly ordinary. I'll wake up beside you instead of through a screen. We'll argue about what to eat instead of what to watch. You'll steal my space, I'll complain about it, and neither of us will have to say goodbye when the night ends.",
+      "",
       "And I think that's what I look forward to most. Not some perfect life. Just more of you.",
-      "So if you ever have a day where you wonder whether all this distance is worth it, remember what we've already made out of it. We've done a lot with very little. Imagine what we'll do when we finally have the same front door.",
+      "",
+      "So if you ever have a day where you wonder whether all this distance is worth it, remember what we've already made out of it. We've done a lot with very little.",
+      "",
+      "Imagine what we'll do when we finally have the same front door.",
+      "",
       "We're not finished yet, minha querida."
     ],
-    signature: "Always by your side, Jazz",
-    postScript: "P.S. Check the 'When We Meet' list whenever you need excitement for what's coming.",
-    opened: false,
+    "waxColor": "emerald",
+    "signature": "Always by your side, Jazz",
+    "postScript": "P.S. Pake says mwah to Senguin",
+    "isAnniversaryLetter": false,
+    "opened": true
   }
 ];
 
 export const initialConstellations: ConstellationStar[] = [
   {
-    id: 'star-1',
-    name: 'The First 3-Hour Call',
-    x: 18,
-    y: 28,
-    size: 6,
-    secretMemory: 'The night we lost track of all time and realized we could talk about everything and nothing forever.',
-    discovered: false,
+    "id": "star-1",
+    "name": "The First 3-Hour Call",
+    "x": 18,
+    "y": 28,
+    "size": 6,
+    "secretMemory": "The night we lost track of all time and realized we could talk about everything and nothing forever.",
+    "discovered": false
   },
   {
-    id: 'star-2',
-    name: 'Synchronized Breathing',
-    x: 42,
-    y: 18,
-    size: 7,
-    secretMemory: 'Waking up with the call still going at 6 AM, hearing your soft slow breathing across the speaker.',
-    discovered: false,
+    "id": "star-2",
+    "name": "Synchronized Breathing",
+    "x": 42,
+    "y": 18,
+    "size": 7,
+    "secretMemory": "Waking up with the call still going at 6 AM, hearing your soft slow breathing across the speaker.",
+    "discovered": false
   },
   {
-    id: 'star-3',
-    name: 'The Inside Joke',
-    x: 76,
-    y: 24,
-    size: 5,
-    secretMemory: 'That moment we both broke down laughing until our stomachs hurt over something nobody else would understand.',
-    discovered: false,
+    "id": "star-3",
+    "name": "The Inside Joke",
+    "x": 76,
+    "y": 24,
+    "size": 5,
+    "secretMemory": "That moment we both broke down laughing until our stomachs hurt over something nobody else would understand.",
+    "discovered": false
   },
   {
-    id: 'star-4',
-    name: 'September 29th North Star',
-    x: 88,
-    y: 42,
-    size: 9,
-    secretMemory: 'Our anniversary. The golden anchor in the calendar that reminds me how blessed my life became with you in it.',
-    discovered: true,
+    "id": "star-4",
+    "name": "September 29th North Star",
+    "x": 88,
+    "y": 42,
+    "size": 9,
+    "secretMemory": "Our anniversary. The golden anchor in the calendar that reminds me how blessed my life became with you in it.",
+    "discovered": true
   },
   {
-    id: 'star-5',
-    name: 'The First Movie We Watched Together',
-    x: 30,
-    y: 65,
-    size: 6,
-    secretMemory: 'Counting down "3, 2, 1, PLAY" to sync up our video players at the exact same millisecond.',
-    discovered: false,
+    "id": "star-5",
+    "name": "The First Movie We Watched Together",
+    "x": 30,
+    "y": 65,
+    "size": 6,
+    "secretMemory": "Counting down \"3, 2, 1, PLAY\" to sync up our video players at the exact same millisecond.",
+    "discovered": false
   },
   {
-    id: 'star-6',
-    name: 'The Promise Star',
-    x: 64,
-    y: 72,
-    size: 8,
-    secretMemory: 'The promise that no matter how long the flight or how many miles, I will be standing at the gate waiting for you.',
-    discovered: false,
+    "id": "star-6",
+    "name": "The Promise Star",
+    "x": 64,
+    "y": 72,
+    "size": 8,
+    "secretMemory": "The promise that no matter how long the flight or how many miles, I will be standing at the gate waiting for you.",
+    "discovered": false
   }
 ];

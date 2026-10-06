@@ -22,6 +22,7 @@ import { LiveLettersDesk } from './components/LiveLettersDesk';
 import { TactileHeartbeat } from './components/TactileHeartbeat';
 import { ConstellationModal } from './components/ConstellationModal';
 import { AnniversaryTimeLockScreen } from './components/AnniversaryTimeLockScreen';
+import { AnniversarySettingsModal } from './components/AnniversarySettingsModal';
 import {
   Heart,
   Clock,
@@ -31,18 +32,31 @@ import {
   Send,
   Sparkles,
   Star,
+  Settings,
+  Wrench,
+  Eye,
+  Edit3,
+  Download,
+  RefreshCw,
+  CheckCircle2,
 } from 'lucide-react';
 
 const STORAGE_KEY = 'meridian_sanctuary_v1';
 const UNLOCK_TIME = '2026-10-05T22:00:00';
 
 export default function App() {
-  // Application State - Locked in permanently for Aline
-  const [config] = useState<AnniversaryConfig>(() => ({
-    ...initialConfig,
-    unlockDateTime: UNLOCK_TIME,
-    isSealed: true,
-  }));
+  // Application State
+  const [config, setConfig] = useState<AnniversaryConfig>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_config`);
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return {
+      ...initialConfig,
+      unlockDateTime: UNLOCK_TIME,
+      isSealed: true,
+    };
+  });
 
   const [bucketList, setBucketList] = useState<BucketListItem[]>(() => {
     try {
@@ -92,8 +106,54 @@ export default function App() {
     }
   });
 
-  // Permanently in recipient mode for Aline (no creator mode, no switching)
-  const isCreatorMode = false;
+  // Creator / Workshop Mode (Default to false so it is 100% Aline's Sanctuary)
+  const [isCreatorMode, setIsCreatorMode] = useState<boolean>(false);
+  const [secretTapCount, setSecretTapCount] = useState(0);
+
+  const handleSecretTap = () => {
+    const next = secretTapCount + 1;
+    if (next >= 4) {
+      setIsCreatorMode((prev) => !prev);
+      setSecretTapCount(0);
+    } else {
+      setSecretTapCount(next);
+    }
+  };
+
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [bakeStatus, setBakeStatus] = useState<string | null>(null);
+  const [isBaking, setIsBaking] = useState(false);
+
+  // Sync to disk when config changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${STORAGE_KEY}_config`, JSON.stringify(config));
+    } catch (e) {
+      console.warn('Storage error', e);
+    }
+  }, [config]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${STORAGE_KEY}_creator_mode`, String(isCreatorMode));
+    } catch {}
+  }, [isCreatorMode]);
+
+  // Load backend sanctuary content if present
+  useEffect(() => {
+    fetch('/api/sanctuary-content')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data && !data.empty) {
+          if (data.config) setConfig((prev) => ({ ...prev, ...data.config }));
+          if (data.bucketList && Array.isArray(data.bucketList)) setBucketList(data.bucketList);
+          if (data.poems && Array.isArray(data.poems)) setPoems(data.poems);
+          if (data.letters && Array.isArray(data.letters)) setLetters(data.letters);
+          if (data.constellations && Array.isArray(data.constellations)) setConstellations(data.constellations);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Track if current session has bypassed/unlocked the lock screen
   const [sessionUnlocked, setSessionUnlocked] = useState<boolean>(() => {
@@ -102,7 +162,7 @@ export default function App() {
         return true;
       }
     } catch {}
-    const target = new Date(UNLOCK_TIME).getTime();
+    const target = new Date(config.unlockDateTime || UNLOCK_TIME).getTime();
     return Date.now() >= target;
   });
 
@@ -150,11 +210,14 @@ export default function App() {
     setTimeout(() => setHeartbeatPulseActive(false), 2200);
   };
 
-  const handleUnlockEarly = () => {
+  const handleUnlockEarly = (asCreator?: boolean) => {
     try {
       localStorage.setItem(`${STORAGE_KEY}_unlocked_10pm`, 'true');
     } catch {}
     setSessionUnlocked(true);
+    if (asCreator) {
+      setIsCreatorMode(true);
+    }
   };
 
   const handleSelectStar = (star: ConstellationStar) => {
@@ -196,6 +259,12 @@ export default function App() {
     setBucketList((prev) => [item, ...prev]);
   };
 
+  const handleUpdateBucketItem = (updated: BucketListItem) => {
+    setBucketList((prev) =>
+      prev.map((item) => (item.id === updated.id ? updated : item))
+    );
+  };
+
   const handleDeleteBucketItem = (id: string) => {
     setBucketList((prev) => prev.filter((item) => item.id !== id));
   };
@@ -228,10 +297,43 @@ export default function App() {
     setPoems((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
   };
 
+  const handleDeletePoem = (id: string) => {
+    setPoems((prev) => prev.filter((p) => p.id !== id));
+  };
+
+  const handleBakeBundle = async () => {
+    setIsBaking(true);
+    setBakeStatus('Packaging customized sanctuary into deployment zip...');
+    try {
+      const res = await fetch('/api/bake-bundle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          config,
+          bucketList,
+          poems,
+          letters,
+          constellations,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setBakeStatus('Bundle packaged with all your customized changes! Ready to drop in the morning.');
+      } else {
+        setBakeStatus('Saved locally to browser.');
+      }
+    } catch {
+      setBakeStatus('Saved locally to browser.');
+    } finally {
+      setIsBaking(false);
+      setTimeout(() => setBakeStatus(null), 6000);
+    }
+  };
+
   const discoveredStarsCount = constellations.filter((s) => s.discovered).length;
 
-  // Check if Time Lock Screen should be displayed (locked until Oct 5 at 22:00 unless unlocked early with passcode)
-  const targetUnlockTime = new Date(UNLOCK_TIME).getTime();
+  // Check if Time Lock Screen should be displayed (locked until target time unless unlocked early with passcode)
+  const targetUnlockTime = new Date(config.unlockDateTime || UNLOCK_TIME).getTime();
   const isAppLocked = !sessionUnlocked && Date.now() < targetUnlockTime;
 
   if (isAppLocked) {
@@ -244,10 +346,11 @@ export default function App() {
           themePalette={config.themePalette || 'soft-red'}
         />
         <AnniversaryTimeLockScreen
-          unlockDateTime={UNLOCK_TIME}
+          unlockDateTime={config.unlockDateTime || UNLOCK_TIME}
           herName={config.herName}
           hisName={config.hisName}
           secretPasscode={config.secretPasscode || 'september29'}
+          creatorPasscode={config.creatorPasscode || 'jazz29'}
           onUnlockEarly={handleUnlockEarly}
         />
       </div>
@@ -286,31 +389,102 @@ export default function App() {
         </div>
       )}
 
+      {/* Jazz's Workshop Bar (Visible in Creator Mode) */}
+      {isCreatorMode && (
+        <div className="bg-[#1c0813] border-b border-[#e11d48]/40 px-4 py-2 relative z-30 shadow-lg">
+          <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#fbbf24] animate-pulse" />
+              <span className="font-bold text-[#fef08a] flex items-center gap-1.5 uppercase tracking-wide">
+                <Wrench className="w-3.5 h-3.5 text-[#fbbf24]" />
+                <span>Jazz's Workshop (Full Edit Mode Active)</span>
+              </span>
+              <span className="hidden md:inline-block text-[#fda4af]/70 text-[11px]">
+                • You can edit or add anything in any tab
+              </span>
+            </div>
+
+            <div className="flex items-center flex-wrap gap-2">
+              {/* Settings & Dates Button */}
+              <button
+                type="button"
+                onClick={() => setIsSettingsModalOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#2a0e1c] hover:bg-[#3d1326] border border-[#e11d48]/50 text-[#fda4af] hover:text-white transition-colors cursor-pointer text-xs"
+                title="Edit her name, countdown schedule, passcodes, and dedication quotes"
+              >
+                <Settings className="w-3.5 h-3.5 text-[#e5be7a]" />
+                <span>Dates & Settings</span>
+              </button>
+
+              {/* Bake and Package for Morning Deployment */}
+              <button
+                type="button"
+                onClick={handleBakeBundle}
+                disabled={isBaking}
+                className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gradient-to-r from-[#e11d48] to-[#be123c] text-white hover:brightness-110 transition-all font-bold cursor-pointer text-xs shadow-md disabled:opacity-50"
+                title="Package all current customizations into the downloadable zip bundle for morning deployment"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#fbbf24]" />
+                <span>{isBaking ? 'Baking Bundle...' : 'Bake Bundle for Morning'}</span>
+              </button>
+
+              {/* Download Bundle Direct Link */}
+              <a
+                href="/api/download-bundle"
+                download="sanctuary-for-aline-web.zip"
+                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#200b14] hover:bg-[#2e0d1e] border border-[#3b131c] text-[#fda4af] hover:text-white transition-colors text-xs cursor-pointer"
+                title="Download pre-built standalone zip for Vercel / Netlify Drop"
+              >
+                <Download className="w-3 h-3 text-[#fb7185]" />
+                <span>Download .zip</span>
+              </a>
+
+              {/* Exit Creator Mode to Aline's Sanctuary */}
+              <button
+                type="button"
+                onClick={() => setIsCreatorMode(false)}
+                className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#e11d48]/20 hover:bg-[#e11d48]/30 border border-[#e11d48]/50 text-white font-serif transition-colors cursor-pointer text-xs"
+                title="Exit Creator Mode and return to Aline's Sanctuary"
+              >
+                <Heart className="w-3 h-3 text-[#fb7185] fill-current" />
+                <span>Return to Aline's Sanctuary</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Top Ambient Navigation & Dedication Bar */}
       <header className="relative z-20 border-b border-[#3b131c]/80 bg-[#12040a]/85 backdrop-blur-md sticky top-0">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Brand & Dedication */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#e11d48]/15 border border-[#e11d48]/35 flex items-center justify-center text-[#fda4af]">
+            <button
+              type="button"
+              onClick={handleSecretTap}
+              className="w-8 h-8 rounded-full bg-[#e11d48]/15 border border-[#e11d48]/35 flex items-center justify-center text-[#fda4af] hover:scale-105 transition-transform cursor-pointer"
+              title="Dedicated to Aline"
+            >
               <Sparkles className="w-4 h-4" />
-            </div>
+            </button>
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-sm sm:text-base font-serif font-bold text-[#fdf2f4] tracking-wide">
-                  Dedicated to Aline
+                  Dedicated to {config.herName}
                 </span>
                 <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#e11d48]/15 border border-[#e11d48]/30 text-[#fda4af]">
                   SEPTEMBER 29TH
                 </span>
               </div>
               <p className="text-[11px] text-[#d1a3ac] font-sans">
-                Engineered with devotion by <span className="text-[#fecdd3] font-medium">{config.hisName}</span> For <span className="text-[#fda4af] font-medium">{config.herName}</span>
+                Engineered with devotion by <span className="text-[#fecdd3] font-medium">{config.hisName}</span> For <span className="text-[#fda4af] font-medium">{config.herName}</span>{config.herPetName && <span className="italic font-serif text-[#fda4af] ml-1">({config.herPetName})</span>}
               </p>
             </div>
           </div>
 
           {/* Right Header Controls: Purely for Aline */}
           <div className="flex items-center gap-2 sm:gap-3">
+
             {/* Constellation memories found indicator */}
             <div
               className="hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#200b14] border border-[#3b131c] text-xs font-mono text-[#fda4af]"
@@ -413,6 +587,7 @@ export default function App() {
               poems={poems}
               onAddPoem={handleAddPoem}
               onUpdatePoem={handleUpdatePoem}
+              onDeletePoem={handleDeletePoem}
               herName={config.herName}
               hisName={config.hisName}
               isCreatorMode={isCreatorMode}
@@ -426,6 +601,7 @@ export default function App() {
               onToggleComplete={handleToggleBucketComplete}
               onTogglePriority={handleToggleBucketPriority}
               onAddItem={handleAddBucketItem}
+              onUpdateItem={handleUpdateBucketItem}
               onDeleteItem={handleDeleteBucketItem}
               herName={config.herName}
               hisName={config.hisName}
@@ -451,6 +627,45 @@ export default function App() {
         herName={config.herName}
         isCreatorMode={isCreatorMode}
       />
+
+      {/* Anniversary Preferences & Schedule Settings Modal */}
+      <AnniversarySettingsModal
+        isOpen={isSettingsModalOpen}
+        onClose={() => setIsSettingsModalOpen(false)}
+        config={config}
+        onSaveConfig={(newConfig) => {
+          setConfig(newConfig);
+          try {
+            localStorage.setItem(`${STORAGE_KEY}_config`, JSON.stringify(newConfig));
+          } catch {}
+          fetch('/api/sanctuary-content', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              config: newConfig,
+              bucketList,
+              poems,
+              letters,
+              constellations,
+            }),
+          }).catch(() => {});
+        }}
+        onResetDefaults={() => {
+          setConfig({
+            ...initialConfig,
+            unlockDateTime: UNLOCK_TIME,
+            isSealed: true,
+          });
+        }}
+      />
+
+      {/* Toast Notification Banner */}
+      {bakeStatus && (
+        <div className="fixed bottom-6 right-6 z-50 bg-[#1c0813] border-2 border-[#e11d48] text-white px-5 py-3 rounded-2xl shadow-[0_0_30px_rgba(225,29,72,0.4)] flex items-center gap-3 animate-fadeIn text-xs font-mono">
+          <CheckCircle2 className="w-5 h-5 text-[#34d399] shrink-0" />
+          <span>{bakeStatus}</span>
+        </div>
+      )}
     </div>
   );
 }

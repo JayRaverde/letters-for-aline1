@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
+import { execSync } from "child_process";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 
@@ -8,6 +9,7 @@ const PORT = Number(process.env.PORT) || 3000;
 const DATA_DIR = path.join(process.cwd(), "data");
 const LETTERS_FILE = path.join(DATA_DIR, "live_letters.json");
 const VAULT_FILE = path.join(DATA_DIR, "letters_vault.json");
+const SANCTUARY_CONTENT_FILE = path.join(DATA_DIR, "sanctuary_content.json");
 
 // Ensure data directory exists
 if (!fs.existsSync(DATA_DIR)) {
@@ -136,6 +138,81 @@ async function startServer() {
       lettersCount: liveLetters.length,
       timestamp: new Date().toISOString(),
     });
+  });
+
+  // Download pre-built standalone ZIP bundle for instant drag & drop hosting (Netlify Drop / Vercel)
+  app.get("/api/download-bundle", (_req, res) => {
+    const zipPath = path.resolve(process.cwd(), "public", "sanctuary-for-aline-web.zip");
+    if (fs.existsSync(zipPath)) {
+      res.setHeader("Content-Type", "application/zip");
+      res.setHeader("Content-Disposition", 'attachment; filename="sanctuary-for-aline-web.zip"');
+      res.sendFile(zipPath);
+    } else {
+      res.status(404).send("Bundle is compiling, please retry in a moment.");
+    }
+  });
+
+  // Get saved sanctuary custom content
+  app.get("/api/sanctuary-content", (_req, res) => {
+    try {
+      if (fs.existsSync(SANCTUARY_CONTENT_FILE)) {
+        const raw = fs.readFileSync(SANCTUARY_CONTENT_FILE, "utf-8");
+        return res.json(JSON.parse(raw));
+      }
+      return res.json({ empty: true });
+    } catch (err) {
+      console.error("Error reading sanctuary content:", err);
+      return res.status(500).json({ error: "Failed to read content" });
+    }
+  });
+
+  // Save sanctuary content from Creator Workshop
+  app.post("/api/sanctuary-content", (req, res) => {
+    try {
+      const data = req.body;
+      fs.writeFileSync(SANCTUARY_CONTENT_FILE, JSON.stringify(data, null, 2), "utf-8");
+      
+      const publicDir = path.join(process.cwd(), "public");
+      fs.mkdirSync(publicDir, { recursive: true });
+      fs.writeFileSync(path.join(publicDir, "sanctuary-data.json"), JSON.stringify(data, null, 2), "utf-8");
+
+      return res.json({ success: true, timestamp: new Date().toISOString() });
+    } catch (err) {
+      console.error("Error saving sanctuary content:", err);
+      return res.status(500).json({ error: "Failed to save content" });
+    }
+  });
+
+  // Bake and re-package the standalone bundle for morning deployment
+  app.post("/api/bake-bundle", (req, res) => {
+    try {
+      const data = req.body;
+      if (data && typeof data === 'object') {
+        fs.writeFileSync(SANCTUARY_CONTENT_FILE, JSON.stringify(data, null, 2), "utf-8");
+        
+        const publicDir = path.join(process.cwd(), "public");
+        fs.mkdirSync(publicDir, { recursive: true });
+        fs.writeFileSync(path.join(publicDir, "sanctuary-data.json"), JSON.stringify(data, null, 2), "utf-8");
+
+        const distDir = path.join(process.cwd(), "dist");
+        if (fs.existsSync(distDir)) {
+          fs.writeFileSync(path.join(distDir, "sanctuary-data.json"), JSON.stringify(data, null, 2), "utf-8");
+        }
+      }
+
+      // Re-pack static bundle with python3 scripts/zip_dist.py
+      execSync("python3 scripts/zip_dist.py", { stdio: "inherit" });
+
+      return res.json({
+        success: true,
+        message: "Bundle re-packaged successfully with all your customized letters, poems, and settings!",
+        downloadUrl: "/api/download-bundle",
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: any) {
+      console.error("Error baking bundle:", err);
+      return res.status(500).json({ error: "Failed to bake bundle: " + (err.message || String(err)) });
+    }
   });
 
   // Poetic Verse / Whisper Inspiration

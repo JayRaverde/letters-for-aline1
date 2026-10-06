@@ -12,6 +12,7 @@ import {
   X,
   MessageCircleHeart,
   Moon,
+  Edit3,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -20,6 +21,7 @@ interface MeetingBucketListProps {
   onToggleComplete: (id: string) => void;
   onTogglePriority: (id: string) => void;
   onAddItem: (item: Omit<BucketListItem, 'id' | 'dateAdded'>) => void;
+  onUpdateItem?: (item: BucketListItem) => void;
   onDeleteItem: (id: string) => void;
   herName: string;
   hisName: string;
@@ -31,6 +33,7 @@ export const MeetingBucketList: React.FC<MeetingBucketListProps> = ({
   onToggleComplete,
   onTogglePriority,
   onAddItem,
+  onUpdateItem,
   onDeleteItem,
   herName,
   hisName,
@@ -38,9 +41,10 @@ export const MeetingBucketList: React.FC<MeetingBucketListProps> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<BucketCategory | 'all'>('all');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState<BucketListItem | null>(null);
   const [formAddedBy, setFormAddedBy] = useState<'Jazz' | 'Aline'>('Aline');
 
-  // New item form state
+  // Form state
   const [newTitle, setNewTitle] = useState('');
   const [newCategory, setNewCategory] = useState<BucketCategory>('aline');
   const [newNote, setNewNote] = useState('');
@@ -65,6 +69,7 @@ export const MeetingBucketList: React.FC<MeetingBucketListProps> = ({
   };
 
   const handleOpenAddForAline = () => {
+    setEditingItem(null);
     setFormAddedBy('Aline');
     setNewCategory('aline');
     setNewTitle('');
@@ -73,6 +78,7 @@ export const MeetingBucketList: React.FC<MeetingBucketListProps> = ({
   };
 
   const handleOpenAddGeneral = () => {
+    setEditingItem(null);
     setFormAddedBy(isCreatorMode ? 'Jazz' : 'Aline');
     setNewCategory('firsts');
     setNewTitle('');
@@ -80,19 +86,39 @@ export const MeetingBucketList: React.FC<MeetingBucketListProps> = ({
     setIsAddModalOpen(true);
   };
 
+  const handleOpenEdit = (item: BucketListItem) => {
+    setEditingItem(item);
+    setFormAddedBy(item.addedBy === 'Aline' ? 'Aline' : 'Jazz');
+    setNewCategory(item.category);
+    setNewTitle(item.title);
+    setNewNote(item.note);
+    setIsAddModalOpen(true);
+  };
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTitle.trim()) return;
 
-    onAddItem({
-      title: newTitle.trim(),
-      category: newCategory,
-      note: newNote.trim(),
-      completed: false,
-      isPriority: formAddedBy === 'Aline',
-      addedBy: formAddedBy,
-    });
+    if (editingItem && onUpdateItem) {
+      onUpdateItem({
+        ...editingItem,
+        title: newTitle.trim(),
+        category: newCategory,
+        note: newNote.trim(),
+        addedBy: formAddedBy,
+      });
+    } else {
+      onAddItem({
+        title: newTitle.trim(),
+        category: newCategory,
+        note: newNote.trim(),
+        completed: false,
+        isPriority: formAddedBy === 'Aline',
+        addedBy: formAddedBy,
+      });
+    }
 
+    setEditingItem(null);
     setNewTitle('');
     setNewNote('');
     setIsAddModalOpen(false);
@@ -278,13 +304,22 @@ export const MeetingBucketList: React.FC<MeetingBucketListProps> = ({
                         <Star className={`w-4 h-4 ${item.isPriority ? 'fill-[#e5be7a]' : ''}`} />
                       </button>
                       {isCreatorMode && (
-                        <button
-                          onClick={() => onDeleteItem(item.id)}
-                          className="p-1.5 text-[#9b9487] hover:text-[#d95874] transition-colors cursor-pointer"
-                          title="Remove plan"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
+                        <>
+                          <button
+                            onClick={() => handleOpenEdit(item)}
+                            className="p-1.5 text-[#9b9487] hover:text-[#fda4af] transition-colors cursor-pointer"
+                            title="Edit this plan"
+                          >
+                            <Edit3 className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => onDeleteItem(item.id)}
+                            className="p-1.5 text-[#9b9487] hover:text-[#d95874] transition-colors cursor-pointer"
+                            title="Remove plan"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </>
                       )}
                     </div>
                   </div>
@@ -341,13 +376,19 @@ export const MeetingBucketList: React.FC<MeetingBucketListProps> = ({
             </button>
             <div className="flex items-center gap-2 text-xs font-mono text-[#fda4af] tracking-widest uppercase mb-1">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>WHEN WE MEET | ADD TO OUR CHAPTER</span>
+              <span>{editingItem ? 'EDIT MILESTONE | SANCTUARY WORKSHOP' : 'WHEN WE MEET | ADD TO OUR CHAPTER'}</span>
             </div>
             <h3 className="text-2xl font-serif text-[#f6f0e4] mb-2">
-              {formAddedBy === 'Aline' ? `What Would You Love for Us to Do, ${herName}?` : 'Add an In-Person Milestone'}
+              {editingItem
+                ? `Edit "${editingItem.title}"`
+                : formAddedBy === 'Aline'
+                ? `What Would You Love for Us to Do, ${herName}?`
+                : 'Add an In-Person Milestone'}
             </h3>
             <p className="text-xs text-[#d1a3ac] font-serif italic mb-5">
-              {formAddedBy === 'Aline'
+              {editingItem
+                ? 'Update your notes, category, or title for when you two finally meet.'
+                : formAddedBy === 'Aline'
                 ? `"I want some of our memories to be your idea." Write whatever is in your heart.`
                 : 'Add a new date, movie, meal, or adventure to your shared list.'}
             </p>
@@ -435,7 +476,7 @@ export const MeetingBucketList: React.FC<MeetingBucketListProps> = ({
                   type="submit"
                   className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#e11d48] to-[#be123c] text-white text-xs font-serif font-bold hover:brightness-110 transition-colors cursor-pointer shadow-md"
                 >
-                  Save to When We Meet
+                  {editingItem ? 'Save Changes' : 'Save to When We Meet'}
                 </button>
               </div>
             </form>

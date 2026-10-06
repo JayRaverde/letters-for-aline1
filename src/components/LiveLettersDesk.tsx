@@ -685,6 +685,15 @@ export const LiveLettersDesk: React.FC<LiveLettersDeskProps> = ({
             </h3>
             
             <div className="flex items-center gap-2">
+              <a
+                href="/api/download-bundle"
+                download="sanctuary-for-aline-web.zip"
+                className="text-xs text-[#fda4af] hover:text-white flex items-center gap-1 font-mono transition-colors cursor-pointer bg-[#200b14] hover:bg-[#2e0d1e] px-2.5 py-1 rounded-lg border border-[#e11d48]/40"
+                title="Download complete pre-built static website zip to drag-and-drop into Netlify Drop or Vercel"
+              >
+                <Download className="w-3 h-3 text-[#fb7185]" />
+                <span>Web Bundle (.zip)</span>
+              </a>
               <button
                 type="button"
                 onClick={handleExportText}
